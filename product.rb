@@ -27,9 +27,22 @@ class Product
     products.each_with_index do |value, index|
       puts "#{index}. #{value.show_price_value}"
     end
+    puts "Введите x(латинские), чтобы покинуть магазин"
   end
   #создаем статический метод, с параметром в котором передаем
   #имя xml файла при вызове данного метода в основной программе
+
+  #Создадим метод который будет отвечать за покупку товара
+  def buy
+    if @count > 0
+      puts "Вы купили товар"
+      @count -= 1
+      @price
+    else
+      puts "к сожалению такого товара больше нет"
+      0
+    end
+  end
 
   def self.read_from_xml(file)
     #указываем путь до файла, который в последствии будем парсить
@@ -45,8 +58,8 @@ class Product
     result=[]
     products = nil
     doc.elements.each('products/product') do |element|
-      price = element.attributes['price']
-      amount = element.attributes['amount_available']
+      price = element.attributes['price'].to_i
+      amount = element.attributes['amount_available'].to_i
       #ok, в цикле мы получили значения всех атрибутов price и amount_available
       # и записали их в переменные
 
