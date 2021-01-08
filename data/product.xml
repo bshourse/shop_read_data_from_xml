@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<products>
+  <product price="1000" amount_available="5">
+    <book title="Приключения Тома Сойера" author_name="Марк Твен"></book>
+  </product>
+  <product price="2500" amount_available="11">
+    <book title="The Well Grounded Rubyst" author_name="Some Author"></book>
+  </product>
+  <product price="1500" amount_available="6">
+    <movie title="Криминальное Чтиво" director_name="Квентин Тарантино" year="1999"></movie>
+  </product>
+  <product price="350" amount_available="3">
+    <movie title="Аватар" director_name="Джеймс Кэмерон" year="2005"></movie>
+  </product>
+</products>
