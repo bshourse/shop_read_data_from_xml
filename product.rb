@@ -85,4 +85,52 @@ class Product
     end
     return result
   end
+
+  #Создадим статический метод product_types который будет возвращать массив,
+  # со списком детей класса Product
+
+  def self.product_types
+    [Book, Movie]
+  end
+
+# А этот абстрактный метод будет помогать каждому ребёнку
+# заполнять его поля из консоли
+
+  def read_from_console
+  end
+
+
+  #Создадим метод который будет переопределен у детей
+  #в нем мы будем добавлять в нашу структуру новые продукты с учетом известных нам тегов
+
+  def to_xml
+    res = REXML::Element.new('product')
+    res.attributes['price'] = @price
+    res.attributes['amount_available'] = @count
+    return res
+  end
+
+  # И наконец, напишем метод, который будет сохранять продукт в xml-файл
+  # Предполагается, что файл уже готов по структуре для сохранения
+
+  def save_to_xml(file_name)
+    file_path = File.dirname(__FILE__ ) + '/' + file_name
+
+    unless File.exists?(file_path)
+      abort 'Файл не найден'
+    end
+
+      #читаем текущий список продуктов
+    file = File.new(file_path, 'r:UTF-8')
+    doc = REXML::Document.new(file)
+    file.close
+
+    # Дописываем новый продукт
+
+    file = File.new(file_path, 'w:UTF-8')
+    doc.root.add_element(self.to_xml)
+    doc.write(file, 2)
+    file.close
+
+  end
 end
